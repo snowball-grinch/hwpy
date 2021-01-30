@@ -1,8 +1,7 @@
 # Third question
 import collections
-import sys
-import one
-print(sys.path)
+from one import words
+
 with open("out_most_frequent.txt", "w") as new_file_2:
     new_file_2 = open("out_most_frequent.txt", "w")
     cn = collections.Counter(words)
