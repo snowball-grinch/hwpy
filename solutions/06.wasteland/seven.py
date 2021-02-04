@@ -3,8 +3,7 @@
 import re
 from one import poem_content
 
+new_file_5 = open("out_quote.txt", "w")
 quotes = re.findall(r"\".+", poem_content)
-
-with open("out_quote.txt", "w") as new_file_5:
-    for quote in enumerate(quotes):
-        new_file_5.write(f"{quote[1]}\n")
+for quote in enumerate(quotes):
+    new_file_5.write(f"{quote[1]}\n")
