@@ -1,4 +1,5 @@
 import glob
+import re
 
 
 class File:
@@ -6,11 +7,12 @@ class File:
     list_of_parents = []
 
     def __init__(self, file):
-        self.file = file       # type file
+        self.file = file
         self.__text = ""
+        self.file_name = re.search(r"[0-9]+", self.file).group()
 
     def __repr__(self):
-        return f"{self.file} -> {self.__text}"
+        return f"File[{self.file_name}] -> {self.__text}"
 
     def text(self) -> str:
         if self.__text == "":
@@ -38,11 +40,11 @@ class File:
 
 
 list_of_files = glob.glob('./files/*.txt')
-v = []
+list_of_files_obj = []
 for files in list_of_files:
-    v.append(File(files))
+    list_of_files_obj.append(File(files))
 
 if __name__ == '__main__':
-    for file_obj in v:
+    for file_obj in list_of_files_obj:
         if file_obj.text() == "0":
             print(file_obj)
