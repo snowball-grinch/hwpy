@@ -18,13 +18,11 @@ class File:
         if self.__text == "":
             with open(self.file, "r") as a_file:
                 self.__text = a_file.readline()
-                return self.__text
+        return self.__text
 
     @property
     def parent(self):
         if self.text() != "0":
-            if self.__text == "":
-                self.text()
             file_parent = f'./files/{self.__text}.txt'
             new_file = File(file_parent)
             return new_file
@@ -32,17 +30,22 @@ class File:
 
     @property
     def parents(self):
+        if self.parent:
+            return [self.parent] + self.parents
+        return []
         new = self.parent
-        while new is not None:
-            self.list_of_parents.append(new)
-            new = new.parent
-        return self.list_of_parents
+        # while new is not None:
+        #     self.list_of_parents.append(new)
+        #     new = new.parent
+        # return self.list_of_parents
 
 
 list_of_files = glob.glob('./files/*.txt')
 list_of_files_obj = []
 for files in list_of_files:
-    list_of_files_obj.append(File(files))
+    file = File(files)
+    list_of_files_obj.append(file)
+
 
 if __name__ == '__main__':
     for file_obj in list_of_files_obj:
